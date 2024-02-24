@@ -2,6 +2,7 @@
 import { useQuery } from "react-query";
 import { fetchUsersData } from "../api";
 import Pagination from "./Pagination";
+import { USER } from "../types";
 
 const LIMIT = 5;
 
@@ -40,26 +41,19 @@ function WebUsers() {
         />
       </div>
       <div className='flex flex-col gap-4 min-h-[464px]'>
-        {data?.users.map(
-          (user: {
-            id: number;
-            firstName: string;
-            lastName: string;
-            email: string;
-          }) => {
-            return (
-              <div
-                className='flex flex-col text-white bg-orange-800 p-4 rounded-lg'
-                key={user.id}
-              >
-                <span>
-                  {user.firstName} {user.lastName}
-                </span>
-                <span>{user.email}</span>
-              </div>
-            );
-          }
-        )}
+        {data?.users.map((user: USER) => {
+          return (
+            <div
+              className='flex flex-col text-white bg-orange-800 p-4 rounded-lg'
+              key={user.id}
+            >
+              <span>
+                {user.firstName} {user.lastName}
+              </span>
+              <span>{user.email}</span>
+            </div>
+          );
+        })}
       </div>
       <div className='flex justify-end'>
         <Pagination

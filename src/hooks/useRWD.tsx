@@ -1,9 +1,5 @@
 ﻿import { useState, useEffect } from "react";
-export const DEVICES = {
-  PC: "PC",
-  TABLET: "tablet",
-  MOBILE: "mobile",
-};
+import { DEVICES } from "../constants";
 
 const MAX_TABLET_WIDTH = 768;
 const MAX_MOBILE_WIDTH = 576;

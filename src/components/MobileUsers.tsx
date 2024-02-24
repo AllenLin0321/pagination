@@ -1,7 +1,7 @@
 ﻿import { useInfiniteQuery } from "react-query";
 import { fetchUsersData } from "../api";
 import InfiniteScroll from "react-infinite-scroll-component";
-
+import { USER } from "../types";
 const LIMIT = 8;
 
 function MobileUsers() {
@@ -41,26 +41,19 @@ function MobileUsers() {
         }
         className='flex flex-col gap-4'
       >
-        {users?.map(
-          (user: {
-            id: number;
-            firstName: string;
-            lastName: string;
-            email: string;
-          }) => {
-            return (
-              <div
-                className='flex flex-col text-white bg-orange-800 p-4 rounded-lg'
-                key={user.id}
-              >
-                <span>
-                  {user.firstName} {user.lastName}
-                </span>
-                <span>{user.email}</span>
-              </div>
-            );
-          }
-        )}
+        {users?.map((user: USER) => {
+          return (
+            <div
+              className='flex flex-col text-white bg-orange-800 p-4 rounded-lg'
+              key={user.id}
+            >
+              <span>
+                {user.firstName} {user.lastName}
+              </span>
+              <span>{user.email}</span>
+            </div>
+          );
+        })}
       </InfiniteScroll>
     </div>
   );
