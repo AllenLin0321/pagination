@@ -1,26 +1,13 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import useRWD, { DEVICES } from "./hooks/useRWD";
+import WebUsers from "./components/WebUsers"; // web version
+import MobileUsers from "./components/MobileUsers"; // table and mobile version
 
-function App() {
+const App = () => {
+  const device = useRWD();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='w-screen h-screen bg-gray-600'>
+      {device === DEVICES.PC ? <WebUsers /> : <MobileUsers />}
     </div>
   );
-}
-
+};
 export default App;
