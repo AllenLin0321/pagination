@@ -5,7 +5,7 @@ const MAX_TABLET_WIDTH = 768;
 const MAX_MOBILE_WIDTH = 576;
 
 const useRWD = () => {
-  const [device, setDevice] = useState(DEVICES.MOBILE);
+  const [device, setDevice] = useState("");
 
   const handleRWD = () => {
     if (window.innerWidth > MAX_TABLET_WIDTH) setDevice(DEVICES.PC);

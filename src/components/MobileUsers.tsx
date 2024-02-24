@@ -1,4 +1,5 @@
-﻿import { useInfiniteQuery } from "react-query";
+﻿import { useMemo } from "react";
+import { useInfiniteQuery } from "react-query";
 import { fetchUsersData } from "../api";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { USER } from "../types";
@@ -16,20 +17,34 @@ function MobileUsers() {
     },
   });
 
-  if (error instanceof Error) {
-    return (
-      <p className='text-center	text-white'>An error occurred {error.message}</p>
+  const getUsers = (data: any | undefined): USER[] => {
+    return data?.pages.reduce(
+      (
+        acc: USER[],
+        page: {
+          limit: number;
+          skip: number;
+          total: number;
+          users: USER[];
+        }
+      ) => {
+        return [...acc, ...page.users];
+      },
+      []
     );
-  }
+  };
 
-  const users = data?.pages.reduce((acc, page) => {
-    return [...acc, ...page.users];
-  }, []);
+  const memoizedUsers = useMemo(() => getUsers(data), [data]);
 
   return (
     <div className='p-10 h-full'>
+      {error instanceof Error && (
+        <p className='text-center	text-white'>
+          An error occurred {error.message}
+        </p>
+      )}
       <InfiniteScroll
-        dataLength={users ? users.length : 0}
+        dataLength={memoizedUsers ? memoizedUsers.length : 0}
         next={fetchNextPage}
         hasMore={typeof hasNextPage === "boolean" ? hasNextPage : true} // When first rendering, hasNextPage is `undefined`
         loader={<h4 className='text-center text-white'>Loading...</h4>}
@@ -41,7 +56,7 @@ function MobileUsers() {
         }
         className='flex flex-col gap-4'
       >
-        {users?.map((user: USER) => {
+        {memoizedUsers?.map((user: USER) => {
           return (
             <div
               className='flex flex-col text-white bg-orange-800 p-4 rounded-lg'
