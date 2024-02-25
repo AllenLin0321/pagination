@@ -1,21 +1,10 @@
 ﻿import { useMemo } from "react";
-import { useInfiniteQuery } from "react-query";
-import { fetchUsersData } from "../api";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { USER } from "../types";
-const LIMIT = 8;
+import { useInfiniteUsersQuery } from "../hooks/useUsersQuery";
 
 function MobileUsers() {
-  const { error, data, fetchNextPage, hasNextPage } = useInfiniteQuery({
-    queryKey: ["usersData"],
-    queryFn: ({ pageParam }) => fetchUsersData({ pageParam, limit: LIMIT }),
-    getNextPageParam: (lastPage, allPages) => {
-      // Return `undefined` to indicate there is no next page available.
-      return lastPage.skip + LIMIT > lastPage.total
-        ? undefined
-        : allPages.length + 1;
-    },
-  });
+  const { error, data, fetchNextPage, hasNextPage } = useInfiniteUsersQuery();
 
   const getUsers = (data: any | undefined): USER[] => {
     return data?.pages.reduce(

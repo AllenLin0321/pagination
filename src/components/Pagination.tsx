@@ -1,5 +1,5 @@
-﻿import ChevronLeftIcon from "./ChevronLeftIcon";
-import ChevronRightIcon from "./ChevronRightIcon";
+﻿import ChevronLeftIcon from "./Icons/ChevronLeftIcon";
+import ChevronRightIcon from "./Icons/ChevronRightIcon";
 
 interface Pagination {
   currPage: number;

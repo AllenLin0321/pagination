@@ -1,20 +1,13 @@
 ﻿import { useState } from "react";
-import { useQuery } from "react-query";
-import { fetchUsersData } from "../api";
 import Pagination from "./Pagination";
 import { USER } from "../types";
-
-const LIMIT = 5;
+import { useUsersQuery } from "../hooks/useUsersQuery";
 
 function WebUsers() {
   const [page, setPage] = useState(1);
   let totalPage: number = 0;
 
-  const { error, data } = useQuery({
-    queryKey: ["usersData", page],
-    queryFn: () => fetchUsersData({ pageParam: page, limit: LIMIT }),
-    keepPreviousData: true,
-  });
+  const { error, data } = useUsersQuery(page);
 
   if (error instanceof Error) {
     return (

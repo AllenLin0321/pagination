@@ -1,7 +1,6 @@
 ﻿import React from "react";
 import { render, screen } from "@testing-library/react";
-import Pagination from "./Pagination";
-import userEvent from "@testing-library/user-event";
+import Pagination from "../components/Pagination";
 
 test("test buttons are in the document", () => {
   render(

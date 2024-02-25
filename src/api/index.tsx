@@ -1,5 +1,4 @@
-﻿import axios from "axios";
-const API_URL = "https://dummyjson.com/users";
+﻿import axiosClient from "../axiosClient";
 
 interface FETCH_USERS_DATA {
   pageParam: number;
@@ -12,7 +11,7 @@ export const fetchUsersData = async ({
 }: FETCH_USERS_DATA) => {
   const skip: number = limit * (pageParam - 1);
 
-  const res = await axios.get(API_URL, {
+  const res = await axiosClient.get("/users", {
     params: {
       limit,
       skip,
