@@ -30,6 +30,7 @@ const Pagination = ({
           if (isPrevButtonDisable) return;
           onClickPrevButton();
         }}
+        data-testid='prev'
       >
         <ChevronLeftIcon />
       </button>
@@ -54,6 +55,7 @@ const Pagination = ({
           if (isNextButtonDisable) return;
           onClickNextButton();
         }}
+        data-testid='next'
       >
         <ChevronRightIcon />
       </button>
